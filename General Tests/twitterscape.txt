@@ -1,0 +1,1 @@
+snscrape --jsonl --max-results 10 twitter-search --top apple
