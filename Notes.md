@@ -39,31 +39,19 @@ Fully Connected Layer is the last few layers. Here we will be "flattening" the l
 
 This is AlexNet. This has 8 layers. % convolutional and 3 fully connected. We do not count the pooling layers as they have 0 parameters.
 
-
-
 ### Inception Module
 
 <img src="file:///C:/Users/Anirudha/AppData/Roaming/marktext/images/2023-06-12-13-12-45-image.png" title="" alt="" data-align="center">
 
 Here we will be using kernels of different sizes parallelly. We will do a 1x1 convolution and a 3x3 pooling+1x1 convolution. Along with this we will do a 1x1 convolution + 3x3 convolution and 1x1 convolution + 5x5 convolution. After this we will use a filter to concatenate the outputs.
 
-
-
 The number of 1x1 is varied and the sizes of convolution are varied (3x3 and 5x5).
 
-
-
 We know that the FCI is usually very large. To reduce its size we will do average pooling on the last layer. So if the last layer is 7x7x512 we will convert it to only 512. 
-
-
 
 ![](C:\Users\Anirudha\AppData\Roaming\marktext\images\2023-06-12-13-20-06-image.png)
 
 This is GoogLeNet.
-
-
-
-
 
 ![](C:\Users\Anirudha\AppData\Roaming\marktext\images\2023-06-12-13-27-19-image.png)
 
