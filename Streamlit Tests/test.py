@@ -3,8 +3,22 @@ import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
 import snscrape.modules.twitter as sntwitter
+from streamlit_extras.mandatory_date_range import date_range_picker
 import tweet_embed as te
+from streamlit_option_menu import option_menu
 
+# Set streamlit to wide mode
+
+def on_change(a):
+    st.write("wow something changed: "+a)
+
+menu_bar = option_menu("Testing", ["Home", "Run Model", "View stocks", 'Profile'], icons=['house', 'cpu', "graph-up-arrow", 'person'], on_change=on_change,key='aa', orientation="horizontal")
+
+#switch case in python
+if menu_bar=="Home":
+    st.write("Welcome home")
+elif menu_bar == "Run Model":
+    st.write("Welcome to hell")
 
 # Define user agent
 user_agent = "praw_scraper_1.0"
@@ -24,8 +38,9 @@ subreddit_name = "all"
 subreddit = reddit.subreddit(subreddit_name)
 
 inp = st.text_input("Enter what you want to search for")
-startdate = st.date_input("Start date")
-enddate = st.date_input("End date")
+result = date_range_picker("Select a date range")
+startdate = result[0]
+enddate = result[1]
 if st.button("Search"):
     results=subreddit.search(inp, limit=10)
 
@@ -65,13 +80,17 @@ if st.button("Search"):
 
     
 
-    twitter_input = inp+" since:"+startdate.strftime("%Y-%m-%d")+" until:"+enddate.strftime("%Y-%m-%d")+" lang:en"
+    twitter_input = inp+" since:"+startdate.strftime("%Y-%m-%d")+" until:"+enddate.strftime("%Y-%m-%d")
     st.write(twitter_input)
+    extra = 0
     #this uses snscraper to get latest tweets about apple
     for i,tweet in enumerate(sntwitter.TwitterSearchScraper(twitter_input).get_items()):
-        if i>3:
+        if i>10+extra:
             break
         #append to df1
+        if tweet.lang != 'en':
+            extra += 1
+            continue
         df2 = pd.DataFrame({'Tweet': [tweet.content], 'Date': [tweet.date], 'URL': [tweet.url]})
         df1 = pd.concat([df1, df2], ignore_index=True)
 
