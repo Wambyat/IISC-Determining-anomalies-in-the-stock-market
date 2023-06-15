@@ -6,11 +6,16 @@ import snscrape.modules.twitter as sntwitter
 from streamlit_extras.mandatory_date_range import date_range_picker
 import tweet_embed as te
 
-# Define user agent
-user_agent = "praw_scraper_1.0"
+# !TODO Move this to the secret vault
+# This instanctiates the praw.Reddit object.
+# @params (Store all these in the secret vault)
+#   username: The username of the reddit account.
+#   password: The password of the reddit account.
+#   client_id: The client id of the reddit account. This is from the user account. Get it from somewhere I forgot.
+#   client_secret: The client secret of the reddit account. This is from the user account. Get it from somewhere I forgot.
+#   user_agent: The user agent of the reddit account. Esentially the name of the bot. We will use praw_scraper_1.0
 
-# Create an instance of reddit class
-# Move this to the secret vault
+user_agent = "praw_scraper_1.0"
 reddit = praw.Reddit(
                      username="Wambyat",
                      password="47acadaniaaa",
@@ -18,9 +23,6 @@ reddit = praw.Reddit(
                      client_secret="iOAq0BDKtBapF5Lf-S_z4_Ckj_tDvQ",
                      user_agent=user_agent
 )
-
-
-#Put the name of the subreddit here. Should be changed to a search instead.
 subreddit_name = "all"
 subreddit = reddit.subreddit(subreddit_name)
 
@@ -30,11 +32,13 @@ def home_page():
     result = date_range_picker("Select a date range")
     startdate = result[0]
     enddate = result[1]
+    
     if st.button("Search"):
+
+        # !TODO Add the filter for dates.
         results=subreddit.search(inp, limit=10)
 
         df = pd.DataFrame()
-
         titles=[]
         scores=[]
         ids=[]
@@ -46,8 +50,6 @@ def home_page():
             scores.append(res.score) #upvotes
             ids.append(res.id)
             
-            
-
         df['Title'] = titles
         df['Id'] = ids
         df['Upvotes'] = scores #upvotes
