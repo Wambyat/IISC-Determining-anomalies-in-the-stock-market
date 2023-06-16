@@ -1,0 +1,13 @@
+name: Auto Update
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          git merge origin/main
