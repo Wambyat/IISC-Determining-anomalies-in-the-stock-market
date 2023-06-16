@@ -1,0 +1,20 @@
+name: Auto-update branches
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Update branches
+        run: |
+          git checkout main
+          git pull
+          git branch -r --format='%(refname:short)' | grep -v 'main$' | sed 's/^origin\///' | xargs -I {} git checkout -B {} origin/{}
