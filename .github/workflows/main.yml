@@ -1,13 +1,27 @@
-name: autoupdate
+name: Update Branches
+
 on:
   push:
     branches:
-      - master
+      - main
+
 jobs:
-  autoupdate:
-    name: autoupdate
-    runs-on: ubuntu-22.04
+  update-branches:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: docker://chinthakagodawita/autoupdate-action:v1
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get branch names
+        id: branches
+        run: |
+          git ls-remote --heads origin | awk -F'/' '{print $3}' | grep -vE 'main$' > branches.txt
+
+      - name: Update branches
+        run: |
+          while read -r branch; do
+            git checkout $branch
+            git merge origin/main --no-edit
+            git push origin $branch
+          done < branches.txt
