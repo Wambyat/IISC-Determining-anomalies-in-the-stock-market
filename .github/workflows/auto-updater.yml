@@ -15,6 +15,5 @@ jobs:
 
       - name: Update branches
         run: |
-          git checkout main
-          git pull
-          git branch -r --format='%(refname:short)' | grep -v 'main$' | sed 's/^origin\///' | xargs -I {} git checkout -B {} origin/{}
+          git fetch
+          git rebase origin/master
