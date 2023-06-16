@@ -53,6 +53,4 @@ We know that the FCI is usually very large. To reduce its size we will do averag
 
 This is GoogLeNet.
 
-![](C:\Users\Anirudha\AppData\Roaming\marktext\images\2023-06-12-13-27-19-image.png)
-
-What are these :,(
+End of notes.
