@@ -1,3 +1,4 @@
+import yfinance as yf
 import praw
 import pandas as pd
 import streamlit as st
@@ -5,6 +6,7 @@ import streamlit.components.v1 as components
 import snscrape.modules.twitter as sntwitter
 from streamlit_extras.mandatory_date_range import date_range_picker
 import tweet_embed as te
+import myStemmer as mS
 
 # !TODO Move this to the secret vault
 # This instanctiates the praw.Reddit object.
@@ -28,13 +30,17 @@ subreddit = reddit.subreddit(subreddit_name)
 
 
 def home_page():
-    inp = st.text_input("Enter what you want to search for")
+    inp = st.text_input("Enter company's ticker")
     result = date_range_picker("Select a date range")
     startdate = result[0]
     enddate = result[1]
     
     if st.button("Search"):
 
+        # company_name =  yf.Ticker(inp).info['longName']
+        # inp = mS.remove_special_characters(company_name)
+        # st.write(inp)
+        mS.remove_special_characters("Hello i am under the water")
         # !TODO Add the filter for dates.
         results=subreddit.search(inp, limit=10)
 
@@ -76,6 +82,8 @@ def home_page():
         extra = 0
         #this uses snscraper to get latest tweets about apple
         for i,tweet in enumerate(sntwitter.TwitterSearchScraper(twitter_input).get_items()):
+            if i>20:
+                break
             if i>10+extra:
                 break
             #append to df1
