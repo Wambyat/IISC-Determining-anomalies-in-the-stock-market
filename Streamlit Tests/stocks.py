@@ -10,6 +10,6 @@ def stocks_page():
     hist = company.history(period="1y")
     st.write(hist['Open'])
     # st.line_chart(hist['Open'])
-    fig = px.line(hist['Open'])
+    fig = hist['Open'].plot()
     selected_points = plty_events(fig, click_event=False, hover_event=True)
     #GOnna put the graphs n shit here.
