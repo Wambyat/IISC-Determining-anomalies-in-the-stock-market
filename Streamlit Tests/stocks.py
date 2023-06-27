@@ -37,6 +37,7 @@ def stocks_page():
     if a == True:
         company = yf.Ticker(com)
         st.write(company.info['longName'])
+        company_name =  company.info['longName']
 
         hist = company.history(period="1y")
     
@@ -71,13 +72,15 @@ def stocks_page():
         reddit = praw.Reddit(username="Wambyat", password=passw,client_id="vKxcl2gZOIFpwXw52cJr-A", client_secret="iOAq0BDKtBapF5Lf-S_z4_Ckj_tDvQ", user_agent=user_agent)
         subreddit_name = "all"
         subreddit = reddit.subreddit(subreddit_name)
-        inp = company
+        inp = company_name
         
 
         # company_name =  yf.Ticker(inp).info['longName']
         # inp = mS.remove_special_characters(company_name)
         # st.write(inp)
-        mS.remove_special_characters("Hello i am under the water")
+        inp = mS.remove_special_characters(inp)
+
+        # st.write(inp)
         # !TODO Add the filter for dates.
         results=subreddit.search(inp, limit=10)
 
