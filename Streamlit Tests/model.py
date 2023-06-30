@@ -5,5 +5,5 @@ def model_page():
     if st.button("Run Model"):
         with st.spinner("Model 1 is running"):
             time.sleep(2)
-            st.success("LESSGOOO")
+            st.success("Model has run successfully")
         st.session_state["model_run"] = "Done"
