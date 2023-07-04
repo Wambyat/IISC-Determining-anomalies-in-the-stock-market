@@ -5,21 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form testing</title>
     <link href ="{{ url_for('static', filename = 'form.css') }}" rel = "stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='navbar.css')}}">
 </head>
 <body>
-    <!-- this is a template to test from functionalities-->
-    {% if req_type == "POST" %}
-        <h1>POST request</h1>
-        <p>Name: {{ form_data['name'] }}</p>
-        <p>Age: {{ form_data['age'] }}</p>
-    {% else %}
-    <form action="/formtest" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" style="width: unset;">
-        <label for="age">Age:</label>
-        <input type="text" name="age" id="age" style="width: unset;">
-        <input type="submit" value="Submit">
-    </form>
-    {% endif %}
+    <div class = "navbar"> 
+
+		<a href={{url_for('login')}}>Login/Sign Up</a>
+		<a href={{url_for('home')}}>Home</a>
+		
+		<div class = "logo-div">
+		<a href={{url_for('home')}} style = "background-color: rgba(0,0,0,0.0); position: absolute; width: 75px; height: 65px; "></a>
+		<img src = "{{logo_path}}" alt = "y u see this smh" class="logo"/>
+		</a>
+		</div>
+
+	</div>
+
+    <div class = "page">
+        
+        <!-- this is a template to test from functionalities-->
+        {% if req_type == "POST" %}
+        
+            <h1>POST request</h1>
+            <p>Name: {{ form_data['name'] }}</p>
+            <p>Age: {{ form_data['age'] }}</p>
+    
+        {% else %}
+    
+            <form action="/formtest" method="POST">
+            
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" style="width: unset;">
+            
+                <label for="age">Age:</label>
+                <input type="text" name="age" id="age" style="width: unset;">
+            
+                <input type="submit" value="Submit">
+            
+            </form>
+        
+        {% endif %}
+    
+    </div>
+    
 </body>
 </html>

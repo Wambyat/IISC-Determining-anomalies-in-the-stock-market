@@ -1,0 +1,29 @@
+<html>
+<head>
+
+    <title>Page Not Found</title>
+    
+    <script language="JavaScript" type="text/javascript">
+
+        var seconds =5;
+        var url="{{url_for('home')}}";
+
+        function redirect(){
+            if (seconds <=0){
+                window.location = url;
+            } else {
+                seconds--;
+                document.getElementById("pageInfo").innerHTML="Redirecting to Home Page after "+seconds+" seconds."
+                setTimeout("redirect()", 1000)
+            }
+        }
+
+    </script>
+
+</head>
+
+<body onload="redirect()">
+    <h1>404</h1>
+    <h2> wot is this >:(</h2>
+    <p id="pageInfo"></p>
+</html>
