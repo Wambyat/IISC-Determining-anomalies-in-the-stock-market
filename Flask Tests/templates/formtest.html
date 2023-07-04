@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form testing</title>
+    <link href ="{{ url_for('static', filename = 'form.css') }}" rel = "stylesheet">
 </head>
 <body>
     <!-- this is a template to test from functionalities-->
@@ -12,11 +13,11 @@
         <p>Name: {{ form_data['name'] }}</p>
         <p>Age: {{ form_data['age'] }}</p>
     {% else %}
-    <form action="/formtest" method="POST" style="{{ url_for('static', filename = 'form.css') }}">
+    <form action="/formtest" method="POST">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" style="width: unset;">
         <label for="age">Age:</label>
-        <input type="text" name="age" id="age">
+        <input type="text" name="age" id="age" style="width: unset;">
         <input type="submit" value="Submit">
     </form>
     {% endif %}
