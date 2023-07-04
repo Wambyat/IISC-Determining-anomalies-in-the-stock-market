@@ -1,12 +1,28 @@
+.navi {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	display: inline-block;
+}
+
 
 .navbar {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
 	border-radius: 15px;
-	overflow: hidden;
+	margin: 10px;
+	gap: 10px;
 	position: fixed;
-	min-width: 100%;
+	width: 100%;
 	top: 0;
 	background-color: #c7c0ee;
+}
+
+.logo {
+	height : 50px;
+	width : 50px;
+	margin: 10px 10px;
+	border-radius: 13px;
 }
 
 .navbar a {
@@ -16,9 +32,7 @@
 	background-color: #6b2bff;
 	text-align: center;
 	padding: 10px 10px;
-	border: solid;
-	border-width: 5px;
-	border-color: #c7c0ee;
-	border-radius: 18px;
 	font-size: 22px;
+	margin: 10px 10px;
+	border-radius: 15px;
 }

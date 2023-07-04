@@ -8,19 +8,24 @@
     <link rel="stylesheet" href="{{url_for('static', filename='navbar.css')}}">
 </head>
 <body>
-    <div class = "navbar"> 
+    <div class = "navi">
+    
+        <div class = "navbar"> 
 
-		<a href={{url_for('login')}}>Login/Sign Up</a>
-		<a href={{url_for('home')}}>Home</a>
-		
-		<div class = "logo-div">
-		<a href={{url_for('home')}} style = "background-color: rgba(0,0,0,0.0); position: absolute; width: 75px; height: 65px; "></a>
-		<img src = "{{logo_path}}" alt = "y u see this smh" class="logo"/>
-		</a>
-		</div>
+            <a href={{url_for('login')}}>Login/Sign Up</a>
+            <a href={{url_for('home')}}>Home</a>
+            
+            <div class = "logo-div">
 
-	</div>
+                <a href={{url_for('home')}} style = "background-color: rgba(0,0,0,0.0); position: absolute; width: 75px; height: 65px; "></a>
+                <img src = "{{url_for('static', filename = 'icon.png')}}" alt = "y u see this shit" class="logo"/>
 
+            </div>
+
+        </div>
+    
+    </div>
+    
     <div class = "page">
         
         <!-- this is a template to test from functionalities-->
