@@ -12,7 +12,7 @@
         <p>Name: {{ form_data['name'] }}</p>
         <p>Age: {{ form_data['age'] }}</p>
     {% else %}
-    <form action="/formtest" method="POST">
+    <form action="/formtest" method="POST" style="{{ url_for('static', filename = 'form.css') }}">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name">
         <label for="age">Age:</label>
