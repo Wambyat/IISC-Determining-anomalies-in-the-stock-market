@@ -1,7 +1,7 @@
-PWD c:\School Files\Projects\IISC\iisc-stuff\Documentation
+PWD c:\School Files\Projects\IISC\iisc-stuff\LaTeX_Documentation
 INPUT C:\Users\Anirudha\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\School Files\Projects\IISC\iisc-stuff\Documentation\test.tex
-OUTPUT test.log
+INPUT c:\School Files\Projects\IISC\iisc-stuff\LaTeX_Documentation\Main doc.tex
+OUTPUT Main doc.log
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\base\article.cls
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\base\size10.clo
@@ -20,10 +20,10 @@ INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometr
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\geometry\geometry.cfg
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
-INPUT .\test.aux
-INPUT .\test.aux
-INPUT test.aux
-OUTPUT test.aux
+INPUT .\Main doc.aux
+INPUT .\Main doc.aux
+INPUT Main doc.aux
+OUTPUT Main doc.aux
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr17.tfm
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.tfm
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr8.tfm
@@ -40,9 +40,9 @@ INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmr12.
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmbx12.tfm
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcrm1000.tfm
-OUTPUT test.pdf
+OUTPUT Main doc.pdf
 INPUT C:\Users\Anirudha\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
-INPUT test.aux
+INPUT Main doc.aux
 INPUT C:\Users\Anirudha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Users\Anirudha\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcrm1000.pk
 INPUT C:\Users\Anirudha\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmbx12.pfb
