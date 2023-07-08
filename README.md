@@ -1,2 +1,2 @@
 # Currently confidential
-### Currently being refactored into flask
+### Being refactored into flask
