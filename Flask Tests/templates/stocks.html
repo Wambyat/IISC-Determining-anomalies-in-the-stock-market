@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Stocks</title>
     <link href ="{{ url_for('static', filename = 'form.css') }}" rel = "stylesheet">
     <link rel="stylesheet" href="{{url_for('static', filename='navbar.css')}}">
 </head>
@@ -24,12 +25,28 @@
         </div>
     
     </div>
-
-    <div class = 'page'>
-
-        <h1>Now we looking at {{comp}}'s stocks</h1>
+    
+    <div class = "page">
+        
+        {% if req_type == "POST" %}
+        
+            <h1>POST request</h1>
+            <p>Ticker: {{ form_data['ticker'] }}</p>
+    
+        {% else %}
+    
+            <form action="/stocks" method="POST">
+            
+                <label for="ticker">Stock Ticker:</label>
+                <input type="text" name="ticker" id="ticker">
+            
+                <input type="submit" value="Submit">
+            
+            </form>
+        
+        {% endif %}
     
     </div>
-
+    
 </body>
 </html>
