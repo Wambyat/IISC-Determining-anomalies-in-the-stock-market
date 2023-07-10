@@ -33,13 +33,9 @@ def formtest():
     else:
         return render_template('formtest.html', req_type = request.method)
 
-@app.route('/login')
-def login():
-    return "Thid is the login page"
-
 # Error Handling
 @app.errorhandler(404)
-def page_not_found(e):
+def page_not_found():
     return render_template('404.html')
 
 
