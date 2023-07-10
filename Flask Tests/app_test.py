@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+#!TODO - add session to store ticker
+#!TODO - add functionality to stocks page: getting reddit data and twitter data and the graph thingy.
+
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'mysecretkey'
@@ -9,8 +12,18 @@ def index():
 
 @app.route('/home')
 def home():
-    session['ticker'] = "AAPL"
+    if 'ticker' not in session:
+        session['ticker'] = "default"
     return render_template('home.html', comp = session['ticker'])
+
+@app.route('/stocks', methods = ['GET', 'POST'])
+def stocks():
+    if request.method == 'POST':
+        print("SAD")
+        session['ticker'] = request.form['ticker']
+        return render_template('stocks.html', req_type = request.method, form_data = request.form)
+    else:
+        return render_template('stocks.html', req_type = request.method)
 
 @app.route('/formtest', methods=['GET', 'POST'])
 def formtest():
