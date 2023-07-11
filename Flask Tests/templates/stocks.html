@@ -32,6 +32,25 @@
         
             <h1>POST request</h1>
             <p>Ticker: {{ form_data['ticker'] }}</p>
+
+            <table>
+                <tr>
+                    {% for i in keys %}
+                        <td>
+                            {{i}}
+                        </td>
+                    {% endfor %}
+                </tr>
+                {% for rows in data %}
+                <tr>
+                    {% for da in rows %}
+                    <td>
+                        {{ da }}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
     
         {% else %}
     

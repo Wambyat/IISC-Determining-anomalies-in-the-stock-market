@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, session, redirect, url_for
+from nselib import capital_market
+import pandas
 #!TODO - add session to store ticker
 #!TODO - add functionality to stocks page: getting reddit data and twitter data and the graph thingy.
 
@@ -21,7 +23,10 @@ def stocks():
     if request.method == 'POST':
         print("SAD")
         session['ticker'] = request.form['ticker']
-        return render_template('stocks.html', req_type = request.method, form_data = request.form)
+        data = capital_market.price_volume_and_deliverable_position_data(symbol=session['ticker'], from_date='06-06-2023', to_date='06-07-2023')
+        #get keys of data
+        keys = data.keys()
+        return render_template('stocks.html', req_type = request.method,keys = keys, form_data = request.form, data = data)
     else:
         return render_template('stocks.html', req_type = request.method)
 
@@ -35,7 +40,7 @@ def formtest():
 
 # Error Handling
 @app.errorhandler(404)
-def page_not_found():
+def page_not_found(e):
     return render_template('404.html')
 
 
