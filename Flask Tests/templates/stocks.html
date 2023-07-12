@@ -9,63 +9,40 @@
 </head>
 <body>
     <div class = "navi">
-    
         <div class = "navbar"> 
-
             <a href={{url_for('stocks')}}>Stocks</a>
             <a href={{url_for('home')}}>Home</a>
-            
             <div class = "logo-div">
-
                 <a href={{url_for('home')}} style = "background-color: rgba(0,0,0,0.0); position: absolute; width: 75px; height: 65px; "></a>
                 <img src = "{{url_for('static', filename = 'icon.png')}}" alt = "y u see this shit" class="logo"/>
-
             </div>
-
         </div>
-    
     </div>
     
     <div class = "page">
-        
         {% if req_type == "POST" %}
-        
-            <h1>POST request</h1>
-            <p>Ticker: {{ form_data['ticker'] }}</p>
-
+            <h1>Looking at Ticker: {{ ticker }}</h1>
             <table>
                 <tr>
-                    {% for i in keys %}
-                        <td>
-                            {{i}}
-                        </td>
+                    {% for col in column_names %}
+                        <th>{{col}}</th>
                     {% endfor %}
                 </tr>
-                {% for rows in data %}
+                {% for row in row_data %}
                 <tr>
-                    {% for da in rows %}
-                    <td>
-                        {{ da }}
-                    </td>
+                    {% for col, row_ in zip(column_names, row) %}
+                        <td>{{row_}}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
             </table>
-    
         {% else %}
-    
             <form action="/stocks" method="POST">
-            
                 <label for="ticker">Stock Ticker:</label>
                 <input type="text" name="ticker" id="ticker">
-            
                 <input type="submit" value="Submit">
-            
             </form>
-        
         {% endif %}
-    
-    </div>
-    
+    </div>    
 </body>
 </html>
