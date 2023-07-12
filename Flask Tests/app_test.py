@@ -24,9 +24,8 @@ def stocks():
         print("SAD")
         session['ticker'] = request.form['ticker']
         data = capital_market.price_volume_and_deliverable_position_data(symbol=session['ticker'], from_date='06-06-2023', to_date='06-07-2023')
-        #get keys of data
-        keys = data.keys()
-        return render_template('stocks.html', req_type = request.method,keys = keys, form_data = request.form, data = data)
+        print(data)
+        return render_template('stocks.html', ticker=session['ticker'], req_type = request.method, column_names=data.columns.values, row_data=list(data.values.tolist()), zip=zip)
     else:
         return render_template('stocks.html', req_type = request.method)
 
