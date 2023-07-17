@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.3)  6 JUL 2023 15:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.5) (preloaded format=pdflatex 2023.7.3)  17 JUL 2023 15:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -120,15 +120,15 @@ L3 programming layer <2023-06-16>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 1072 strings out of 476037
- 18883 string characters out of 5778430
- 1862763 words of memory out of 5000000
- 21856 multiletter control sequences out of 15000+600000
+ 1073 strings out of 476037
+ 18901 string characters out of 5778430
+ 1863763 words of memory out of 5000000
+ 21857 multiletter control sequences out of 15000+600000
  518276 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,6n,65p,326b,199s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\Anirudha\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1000.pk><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr9.pfb>
-Output written on "Main doc.pdf" (1 page, 87000 bytes).
+Output written on "Main doc.pdf" (1 page, 88627 bytes).
 PDF statistics:
  41 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
