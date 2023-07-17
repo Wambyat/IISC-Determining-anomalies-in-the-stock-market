@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1688636531 "c:/School Files/Projects/IISC/iisc-stuff/LaTeX_Documentation/Main doc.tex" "Main doc.pdf" "Main doc" 1688636532 0
+["pdflatex"] 1689586678 "c:/School Files/Projects/IISC/iisc-stuff/LaTeX_Documentation/Main doc.tex" "Main doc.pdf" "Main doc" 1689586679 0
   "C:/Users/Anirudha/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1688381120 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/Anirudha/AppData/Local/MiKTeX/fonts/pk/ljfour/jknappen/ec/dpi600/tcrm1000.pk" 1688379293 11548 4a72cfcded5a0c520a45f2bdb8cdcc28 ""
   "C:/Users/Anirudha/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1688377621 23219971 42a343ec78a09a4297da42524cad3ac3 ""
@@ -31,9 +31,9 @@
   "C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/tex/latex/geometry/geometry.sty" 1578053545 42759 9cf6c5257b1bc7af01a58859749dd37a ""
   "C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/tex/latex/graphics/keyval.sty" 1665067579 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
   "C:/Users/Anirudha/AppData/Local/Programs/MiKTeX/tex/latex/l3backend/l3backend-pdftex.def" 1681896761 29940 9473d58112bc8a88f5505b823a053dde ""
-  "Main doc.aux" 1688636532 623 aad5691b34c43474cbdb99b11e77e1c9 "pdflatex"
-  "Main doc.tex" 1688636527 2591 745b774a0c82614a6fbbd2cba0b1455d ""
-  "c:/School Files/Projects/IISC/iisc-stuff/LaTeX_Documentation/Main doc.tex" 1688636527 2591 745b774a0c82614a6fbbd2cba0b1455d ""
+  "Main doc.aux" 1689586679 611 a143c8075905556513068fc630a39efc "pdflatex"
+  "Main doc.tex" 1689586676 2997 b150ece48b54a8f580a19777b6dbb3d4 ""
+  "c:/School Files/Projects/IISC/iisc-stuff/LaTeX_Documentation/Main doc.tex" 1689586676 2997 b150ece48b54a8f580a19777b6dbb3d4 ""
   (generated)
   "Main doc.aux"
   "Main doc.log"

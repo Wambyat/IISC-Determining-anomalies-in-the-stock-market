@@ -7,9 +7,9 @@
 \date{June-July 2023}
 \maketitle
 \begin{abstract}
-We are creating a GAN model and using social media data to find anoamlies in the stock market. We are focusing on Indian stocks.
+We are creating a GAN model and using social media data to find anomalies in the stock market. We are focusing on Indian stocks. We are also building a website to run and provide easy access to the model.
 \end{abstract}
-\section{Technologies and modules used}
+\section{Technologies and modules:}
 \subsection{GAN Modules}
 \begin{itemize}
 \item \underline{haweslib}: This is to generate the values from the stock data. We are taking buy and sell orders and performing hawkes process on them to generate probaility values. These values are then used to generate images.
@@ -25,15 +25,17 @@ We are creating a GAN model and using social media data to find anoamlies in the
 \item \underline{HTML:} This is used to create the basic front end of the website.
 \item \underline{Jinja 2.0:} This is a way to extend the functionality of HTML. We are using it to create the dynamic front end of the website.
 \item \underline{CSS:} This is used to style the website.
+\item \underline{Javascript:} This has been used to add functions that are not possible using flask.
 \end{itemize}
 \subsection{Middle and Back End Technologies}
 \begin{itemize}
 \item \underline{Flask:} This is used to create the server side of the website. This will render the Jinja templates and also create all the linking between the front end and the database.
 \item \underline{Some SQL thing:} This is used to create the database for the website.
+\item \underline{nselib:} This is used to retrieve data about NSE stock market. We are using it to get the list of companies and their stock symbols. We use a class captial\_market to retrieve day prices of a stock.
 \end{itemize}
-\section{All modules that were tested and discarded}
+\section{Discarded modules and technoligies}
 \begin{itemize}
-\item \underline{streamlit:} This was used to create the front end of the website. It was discarded because it was not flexible enough.
+\item \underline{streamlit:} This was used to create the first iteration of the front end of the website. It was discarded because it was not flexible enough.
 \item \underline{pyhawkes:} This was an alternative to haweslib. It was not used as hawkeslib proved to be enough.
 \end{itemize}
 \end{document}
