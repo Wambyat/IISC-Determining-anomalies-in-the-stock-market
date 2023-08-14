@@ -1,7 +1,7 @@
-import streamlit as st
-import streamlit.components.v1 as components
 import requests
 import snscrape.modules.twitter as sntwitter
+import pandas as pd
+import datetime
 
 def embed_tweet(tweet_url):
     api = "https://publish.twitter.com/oembed?url={}".format(tweet_url)
@@ -11,7 +11,7 @@ def embed_tweet(tweet_url):
 
 def twitter_call(inp, startdate, enddate):
     twitter_input = inp+" since:"+startdate.strftime("%Y-%m-%d")+" until:"+enddate.strftime("%Y-%m-%d")
-    st.write(twitter_input)
+    # st.write(twitter_input)
     extra = 0
     #this uses snscraper to get latest tweets about apple
     for i,tweet in enumerate(sntwitter.TwitterSearchScraper(twitter_input).get_items()):
@@ -27,9 +27,9 @@ def twitter_call(inp, startdate, enddate):
         df1 = pd.concat([df1, df2], ignore_index=True)
 
         #append to container
-        tweet_url = te.embed_tweet(tweet.url)
+        # tweet_url = embed_tweet(tweet.url)
 
-        components.html(tweet_url, height=400, scrolling=True)
+        # components.html(tweet_url, height=400, scrolling=True)
 
         # print(tweet.content)
         # print(tweet.date)
@@ -51,3 +51,6 @@ def twitter_call(inp, startdate, enddate):
         # print(tweet.quoteCount)
         # print(tweet.lang)
         
+
+if __name__ == '__main__':
+    twitter_call("apple", datetime.datetime(2021, 1, 1), datetime.datetime(2021, 1, 2))
