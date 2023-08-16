@@ -18,11 +18,12 @@ const routes = [
     }
   },
   {
-    path: '/search',
+    path: '/search/:query',
     name: 'search',
     component: function () {
       return import('../views/SearchView.vue')
-    }
+    },
+    props: true
   }
 ]
 

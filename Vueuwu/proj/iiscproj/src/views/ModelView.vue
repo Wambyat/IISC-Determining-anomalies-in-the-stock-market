@@ -1,5 +1,5 @@
 <template>
-  <div class="Model">
-    <h1>This is the model page</h1>
+  <div class="model">
+    <h1>IG model goes here</h1>
   </div>
 </template>
