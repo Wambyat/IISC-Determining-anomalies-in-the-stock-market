@@ -1,6 +1,4 @@
 from nselib import capital_market
-import pandas
-import nselib
 
 # comp = input("Company ticker: ")
 
@@ -9,7 +7,6 @@ import nselib
 comp = 'ZURAISJNK'
 data = capital_market.equity_list()
 b = data.loc[data['SYMBOL']==comp]['NAME OF COMPANY']
-
 try:
     print(b.values[0])
 except IndexError:
