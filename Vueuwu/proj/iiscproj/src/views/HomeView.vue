@@ -13,8 +13,27 @@
             SearchBar,
         },
         methods: {
-            performSearch(query) {
-                this.$router.push({ name: 'search', params: { query } });
+            async performSearch(query) {
+                const responce = await fetch(
+                    "http://localhost:5000/api/search",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            search: query,
+                        }),
+                    }
+                );
+                const data = await responce.json();
+                let name = "";
+                if (data.error) {
+                    name = data.error;
+                } else {
+                    name = data.name;
+                }
+                this.$router.push({ name: "search", params: { query : name } });
             },
         },
     };
