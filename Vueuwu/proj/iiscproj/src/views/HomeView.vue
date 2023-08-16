@@ -1,18 +1,21 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div class="home">
+        <h1>Home</h1>
+        <search-bar @search="performSearch"></search-bar>
+    </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+    import SearchBar from "../components/SearchBar.vue";
 
-export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        components: {
+            SearchBar,
+        },
+        methods: {
+            performSearch(query) {
+                this.$router.push({ name: 'search', params: { query } });
+            },
+        },
+    };
 </script>
