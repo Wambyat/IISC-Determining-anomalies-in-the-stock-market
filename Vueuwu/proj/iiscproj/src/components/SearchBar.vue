@@ -6,13 +6,20 @@
             placeholder="Search for the company"
             id="compIn" />
         <button @click="performSearch">Search</button>
+        <!-- <p>{{filteredData}}</p> -->
+        <ul v-for="(item, key) in filteredData" :key="key">
+            <!-- making dynamic router link -->
+            <router-link :to="{ name: 'search', params: { query: key }}">
+                <li>{{ key }}</li>
+                </router-link>
+            <li>{{ key }}: {{ item }}</li>
+        </ul>
     </div>
 </template>
 
 <script>
     import { ref, onMounted } from "vue";
     let comp;
-    let filteredData = {};
     export default {
         setup() {
             onMounted(async () => {
@@ -39,6 +46,7 @@
         data() {
             return {
                 searchQuery: "",
+                filteredData: {},
             };
         },
         methods: {
@@ -63,8 +71,8 @@
 
                 const userInput = document.getElementById("compIn").value;
                 console.log("Filtering based on: ", userInput);
-                filteredData = filterJson(comp, userInput);
-                console.log(filteredData);
+                this.filteredData = filterJson(comp, userInput);
+                console.log(this.filteredData);
                 console.log("genList");
             },
         },
