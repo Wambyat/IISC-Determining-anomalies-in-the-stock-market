@@ -12,6 +12,7 @@
 <script>
     import { ref, onMounted } from "vue";
     let comp;
+    let filteredData = {};
     export default {
         setup() {
             onMounted(async () => {
@@ -41,16 +42,6 @@
             };
         },
         methods: {
-            async firstList() {
-                try {
-                    const response = await fetch(
-                        "http://localhost:5000/api/all"
-                    );
-                    const data = await response.json();
-                } catch (error) {
-                    console.error(error);
-                }
-            },
             performSearch() {
                 this.$emit("search", this.searchQuery);
             },
@@ -72,7 +63,7 @@
 
                 const userInput = document.getElementById("compIn").value;
                 console.log("Filtering based on: ", userInput);
-                const filteredData = filterJson(comp, userInput);
+                filteredData = filterJson(comp, userInput);
                 console.log(filteredData);
                 console.log("genList");
             },
