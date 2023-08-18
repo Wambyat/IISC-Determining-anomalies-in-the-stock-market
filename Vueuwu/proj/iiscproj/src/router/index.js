@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import StockView from '../views/StockView.vue'
 
 const routes = [
   {
@@ -20,9 +21,7 @@ const routes = [
   {
     path: '/stock/:query',
     name: 'search',
-    component: function () {
-      return import('../views/StockView.vue')
-    },
+    component: StockView,
     props: true
   }
 ]

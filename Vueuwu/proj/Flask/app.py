@@ -30,7 +30,7 @@ def search():
         data = data[['SYMBOL', 'NAME OF COMPANY']]
         test = {data['SYMBOL'][i]: data['NAME OF COMPANY'][i] for i in range(len(data))}
         try:
-            return jsonify({"name": test[input]})
+            return jsonify({"name": test[input],"ticker": input})
         except KeyError:
             return jsonify({"error": "Invalid ticker <only nse is supported>"})
     except Exception as e:

@@ -2,6 +2,7 @@
     <div class="home">
         <h1>Home</h1>
         <search-bar @search="performSearch"></search-bar>
+        <p id="err"></p>
     </div>
 </template>
 
@@ -26,13 +27,17 @@
                     }
                 );
                 const data = await responce.json();
-                let name = "";
+                let name;
                 if (data.error) {
                     name = data.error;
+                    document.getElementById("err").innerHTML = name;
                 } else {
-                    name = data.name;
+                    name = data.ticker;
+                    this.$router.push({
+                        name: "search",
+                        params: { query: name },
+                    });
                 }
-                this.$router.push({ name: "search", params: { query: name } });
             },
         },
     };
