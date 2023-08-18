@@ -7,7 +7,6 @@
 
 <script>
     import SearchBar from "../components/SearchBar.vue";
-
     export default {
         components: {
             SearchBar,
@@ -33,7 +32,7 @@
                 } else {
                     name = data.name;
                 }
-                this.$router.push({ name: "search", params: { query : name } });
+                this.$router.push({ name: "search", params: { query: name } });
             },
         },
     };

@@ -25,16 +25,27 @@ def ping_pong():
 def search():
     try:
         data = request.get_json()
-        input = data["search"]
+        input = data["search"].upper()
         data = capital_market.equity_list()
-        b = data.loc[data["SYMBOL"] == input]["NAME OF COMPANY"]
+        data = data[['SYMBOL', 'NAME OF COMPANY']]
+        test = {data['SYMBOL'][i]: data['NAME OF COMPANY'][i] for i in range(len(data))}
         try:
-            return jsonify({"name": b.values[0]})
-        except IndexError:
+            return jsonify({"name": test[input]})
+        except KeyError:
             return jsonify({"error": "Invalid ticker <only nse is supported>"})
     except Exception as e:
         return jsonify({"error": str(e)})
 
+
+@app.route("/api/all", methods=["GET"])
+def all():
+    try:
+        data = capital_market.equity_list()
+        data = data[['SYMBOL', 'NAME OF COMPANY']]
+        test = {data['SYMBOL'][i]: data['NAME OF COMPANY'][i] for i in range(len(data))}
+        return jsonify(test)
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 if __name__ == "__main__":
     app.run(debug=True)

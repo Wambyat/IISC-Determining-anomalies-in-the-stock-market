@@ -18,10 +18,10 @@ const routes = [
     }
   },
   {
-    path: '/search/:query',
+    path: '/stock/:query',
     name: 'search',
     component: function () {
-      return import('../views/SearchView.vue')
+      return import('../views/StockView.vue')
     },
     props: true
   }
