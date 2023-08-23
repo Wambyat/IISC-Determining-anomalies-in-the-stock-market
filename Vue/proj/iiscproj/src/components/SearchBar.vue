@@ -4,18 +4,50 @@
             v-model="searchQuery"
             @input="genList"
             placeholder="Search for the company"
-            id="compIn" />
+            id="compIn" style="min-width: 40%; border: none; "/>
         <button @click="performSearch">Search</button>
-        <!-- <p>{{filteredData}}</p> -->
-        <ul v-for="(item, key) in filteredData" :key="key">
-            <!-- making dynamic router link -->
-            <router-link :to="{ name: 'search', params: { query: key }}">
-                <li>{{ key }}</li>
+        <div class="search-list">
+            <ul v-if="filteredData.error">
+                <li>{{ filteredData.error }}</li>
+            </ul>
+            <ul v-else v-for="(item, key) in filteredData" :key="key">
+                <router-link :to="{ name: 'search', params: { query: key } }">
+                    <li>{{ key }}</li>
                 </router-link>
-            <li>{{ key }}: {{ item }}</li>
-        </ul>
+                <li>{{ key }}: {{ item }}</li>
+            </ul>
+        </div>
     </div>
 </template>
+
+<style scoped>
+    .search-list::-webkit-scrollbar {
+        width: 20px;
+        background-color: #f1f1f1;
+        border-bottom-right-radius: 15px;
+    }
+    .search-list::-webkit-scrollbar-thumb {
+        background-color: #888;
+        border: 5px solid transparent;
+        width: 50px;
+        border-radius: 50px;
+        background-color: #8070d4;
+        background-clip: content-box;
+    }
+
+    .search-list::-webkit-scrollbar-track {
+        background-color: #e4e4e4;
+        border-bottom-right-radius: 15px;
+    }
+    .search-list {
+        max-height: 300px;
+        max-width: 40%;
+        overflow-y: scroll;
+        border-radius: 15px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+</style>
 
 <script>
     import { ref, onMounted } from "vue";
@@ -56,6 +88,10 @@
             genList() {
                 function filterJson(jsonData, input) {
                     const filteredJson = {};
+                    // This is only here because the json and makes my computer lag. Test without the limit if u wish.
+                    if (input.length < 3) {
+                        return { error: "Please enter more than 2 characters" };
+                    }
                     for (const key in jsonData) {
                         if (
                             key.includes(input) ||
@@ -68,7 +104,6 @@
                     }
                     return filteredJson;
                 }
-
                 const userInput = document.getElementById("compIn").value;
                 console.log("Filtering based on: ", userInput);
                 this.filteredData = filterJson(comp, userInput);

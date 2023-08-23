@@ -15,18 +15,20 @@ const port = 3000;
 app.get("/api/corporate-announcements", (req, res) => {
     const url =
         "https://www.nseindia.com/api/corporate-announcements?index=equities";
-
     axios
         .get(url)
         .then((response) => {
             res.json(response.data);
         })
         .catch((error) => {
-            res.status(500).json({ error: "An error occurred", error: error });
+            res.status(500).json({
+                error: "An error occurred",
+                error: error,
+                url: url,
+            });
         });
 });
 
-// Start the proxy server
 app.listen(port, () => {
-    console.log(`Proxy server listening at http://localhost:${port}`);
+    console.log(`Server is running on port ${port}`);
 });
