@@ -7,20 +7,36 @@
             id="compIn" style="min-width: 40%; border: none; "/>
         <button @click="performSearch">Search</button>
         <div class="search-list">
-            <ul v-if="filteredData.error">
-                <li>{{ filteredData.error }}</li>
-            </ul>
+            <p v-if="filteredData.error">{{ filteredData.error }}</p>
             <ul v-else v-for="(item, key) in filteredData" :key="key">
-                <router-link :to="{ name: 'search', params: { query: key } }">
-                    <li>{{ key }}</li>
+                <router-link style="text-decoration: none;" :to="{ name: 'search', params: { query: key } }">
+                    <li class="st">{{ key }}: {{ item }}</li>
                 </router-link>
-                <li>{{ key }}: {{ item }}</li>
             </ul>
         </div>
     </div>
 </template>
 
 <style scoped>
+
+.st{
+    color: black;
+    cursor: pointer;
+    /* no underlined */
+    text-decoration: none;
+}
+
+    .search-list ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        cursor: pointer;
+    }
+    .search-list ul:hover {
+        background-color: #f1f1f1;
+}
     .search-list::-webkit-scrollbar {
         width: 20px;
         background-color: #f1f1f1;
@@ -58,21 +74,16 @@
                 console.log("search mounted");
                 const abc = async function () {
                     try {
-                        console.log("try");
                         const response = await fetch(
                             "http://localhost:5000/api/all"
                         );
-                        console.log("first");
                         const data = await response.json();
                         return data;
                     } catch (error) {
                         console.error(error);
                     }
                 };
-                console.log("waiting");
                 comp = await abc();
-                console.log("done");
-                console.log(comp);
             });
         },
         data() {

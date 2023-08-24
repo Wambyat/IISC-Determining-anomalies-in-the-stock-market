@@ -11,6 +11,23 @@ app.use((req, res, next) => {
 });
 const port = 3000;
 
+app.get("/api/starter/", (req, res) => {
+    const url =
+        "https://www.nseindia.com/";
+    axios
+        .get(url)
+        .then((response) => {
+            res.json(response.data);
+        })
+        .catch((error) => {
+            res.status(500).json({
+                error: "An error occurred",
+                error: error,
+                url: url,
+            });
+        });
+});
+
 // Proxy route
 app.get("/api/corporate-announcements", (req, res) => {
     const url =

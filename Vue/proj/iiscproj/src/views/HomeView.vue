@@ -1,16 +1,26 @@
 <template>
     <div class="home">
         <h1>Home</h1>
-        <Graph :dataPoints="dataPoints" />
         <search-bar @search="performSearch"></search-bar>
         <p id="err"></p>
-        <div v-for="(item, key) in news" :key="key">
-            <p>TICKER: {{ item.symbol }}</p>
-            <p>Desc: {{ item.desc }}</p>
-            <p>Company: {{ item.sm_name }}</p>
-            <p>Announcement Time: {{ item.an_dt }}</p>
-            <p>Full announcement: {{ item.attchmntText }}</p>
-        </div>
+
+        <!-- table -->
+        <table class="newsTable">
+            <tr>
+                <th>Ticker</th>
+                <th>Desc</th>
+                <th>Company</th>
+                <th>Announcement Time</th>
+                <th>Full announcement</th>
+            </tr>
+            <tr v-for="(item, key) in news" :key="key">
+                <td>{{ item.symbol }}</td>
+                <td>{{ item.desc }}</td>
+                <td>{{ item.sm_name }}</td>
+                <td>{{ item.an_dt }}</td>
+                <td>{{ item.attchmntText }}</td>
+            </tr>
+        </table>
         <p>
             If you can't see the news after 10 seconds, either refresh the page
             or check if nseindia.com is down
@@ -18,75 +28,51 @@
     </div>
 </template>
 
+<style scoped>
+    table {
+        border: 1px solid black;
+        /* border-collapse: collapse; */
+        width: auto;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: left;
+    }
+</style>
+
 <script>
     import SearchBar from "../components/SearchBar.vue";
-    import Graph from "../components/Graph.vue";
     import { ref, onMounted } from "vue";
     import axios from "axios";
     export default {
         data() {
             return {
                 news: {},
-                dataPoints: [
-                    {
-                        date: "2023-08-01",
-                        price: 150.25,
-                        articleUrl: "https://example.com/article1",
-                    },
-                    {
-                        date: "2023-08-02",
-                        price: 155.5,
-                        articleUrl: "https://example.com/article2",
-                    },
-                    {
-                        date: "2023-08-03",
-                        price: 160.75,
-                        articleUrl: "https://example.com/article3",
-                    },
-                    {
-                        date: "2023-08-04",
-                        price: 162.1,
-                        articleUrl: "https://example.com/article4",
-                    },
-                    {
-                        date: "2023-08-05",
-                        price: 158.9,
-                        articleUrl: "https://example.com/article5",
-                    },
-                    {
-                        date: "2023-08-06",
-                        price: 157.25,
-                        articleUrl: "https://example.com/article6",
-                    },
-                    {
-                        date: "2023-08-07",
-                        price: 154.75,
-                        articleUrl: "https://example.com/article7",
-                    },
-                    {
-                        date: "2023-08-08",
-                        price: 153.0,
-                        articleUrl: "https://example.com/article8",
-                    },
-                    {
-                        date: "2023-08-09",
-                        price: 150.75,
-                        articleUrl: "https://example.com/article9",
-                    },
-                    {
-                        date: "2023-08-10",
-                        price: 149.5,
-                        articleUrl: "https://example.com/article10",
-                    },
-                ],
             };
         },
         setup() {
             const news = ref({});
             onMounted(async () => {
                 console.log("home mounted");
+
+                function starter() {
+                    const apiURL = "http://localhost:3000/api/starter";
+                    return axios
+                        .get(apiURL)
+                        .then((response) => {
+                            console.log(response.data);
+                            return response.data;
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                }
+
                 function getNews(a) {
-                    if (a > 50) {
+                    if (a > 100) {
                         return;
                     }
                     const apiUrl =
@@ -103,14 +89,15 @@
                             getNews(a + 1);
                         });
                 }
-                await getNews(0);
+                // await starter();
+                console.log("getting news");
+                // await getNews(0);
             });
 
             return { news };
         },
         components: {
             SearchBar,
-            Graph,
         },
         methods: {
             async performSearch(query) {
