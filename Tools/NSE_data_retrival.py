@@ -1,16 +1,31 @@
 from nselib import capital_market
-import pandas
-import nselib
+import datetime
 
 # comp = input("Company ticker: ")
 
+today = datetime.date.today()
+print(today.strftime("%d-%m-%Y"))
+yesterday = today - datetime.timedelta(days=5)
+print(yesterday)
 
-# data = capital_market.price_volume_and_deliverable_position_data(symbol=comp, from_date='06-06-2023', to_date='06-07-2023')
-comp = 'ZURAISJNK'
-data = capital_market.equity_list()
-b = data.loc[data['SYMBOL']==comp]['NAME OF COMPANY']
+comp = "FOCUS"
+data = capital_market.price_volume_and_deliverable_position_data(symbol=comp, from_date=yesterday.strftime("%d-%m-%Y"), to_date=today.strftime("%d-%m-%Y"))
+print(data)
+# comp = 'ZURAISJNK'
+# data = capital_market.equity_list()
+# # only columns: SYMBOL, NAME OF COMPANY
+# data = data[['SYMBOL', 'NAME OF COMPANY']]
+# #convert to dict {SYMBOL: NAME OF COMPANY}
+# test = {data['SYMBOL'][i]: data['NAME OF COMPANY'][i] for i in range(len(data))}
+# # print(test)
 
-try:
-    print(b.values[0])
-except IndexError:
-    print("Invalid ticker <only nse is supported>")
+# # data = data.set_index('SYMBOL').T.to_dict('list')
+
+# # print(data)
+
+
+# # b = data.loc[data['SYMBOL']==comp]['NAME OF COMPANY']
+# try:
+#     print(test[comp])
+# except KeyError:
+#     print("Invalid ticker <only nse is supported>")
