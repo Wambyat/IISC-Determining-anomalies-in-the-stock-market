@@ -1,5 +1,4 @@
-# Currently confidential
 ### Being refactored into flask and Vue
-Most of this code is old. The new code is kept locally(Due to security) and will be updated after the end of my internship.
+Refeactoring is almost finished.
 
-My part is creating a front end. It is a stock analysis based project with social media posts and news integrated. 
+It is a stock market analysis based project with social media posts and news integrated. News integration to be done using [newscatcher](https://newscatcherapi.com/)
