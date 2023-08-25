@@ -54,6 +54,3 @@ We know that the FCI is usually very large. To reduce its size we will do averag
 This is GoogLeNet.
 
 End of notes.
-test.
-
-other branch can see this?
