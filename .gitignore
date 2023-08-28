@@ -1,10 +1,10 @@
 tempCodeRunnerFile.py
 b1_tweepy_walkthrough.py
-/Vue/proj/iiscproj/node_modules
-/Vue/proj/Include
-/Vue/proj/Lib
-/Vue/proj/Scripts
-/Vue/proj/pyvenv.cfg
+/Main Code/iiscproj/node_modules
+/Main Code/Include
+/Main Code/Lib
+/Main Code/Scripts
+/Main Code/pyvenv.cfg
 Streamlit Tests/__pycache__/
 Streamlit Tests/__pycache__/tweet_embed.cpython-39.pyc
 General Tests/merged.zip
