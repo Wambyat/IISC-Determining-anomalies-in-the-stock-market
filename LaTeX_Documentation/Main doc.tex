@@ -4,7 +4,7 @@
 \begin{document}
 \title{Documentation}
 \author{Hrithik Singh, Anirudha Anekal}
-\date{June-July 2023}
+\date{June - August 2023}
 \maketitle
 \begin{abstract}
 We are creating a GAN model and using social media data to find anomalies in the stock market. We are focusing on Indian stocks. We are also building a website to run and provide easy access to the model.
@@ -23,19 +23,23 @@ We are creating a GAN model and using social media data to find anomalies in the
 \subsection{Front End Technologies}
 \begin{itemize}
 \item \underline{HTML:} This is used to create the basic front end of the website.
-\item \underline{Jinja 2.0:} This is a way to extend the functionality of HTML. We are using it to create the dynamic front end of the website.
-\item \underline{CSS:} This is used to style the website.
-\item \underline{Javascript:} This has been used to add functions that are not possible using flask.
+\item \underline{Bootstrap + CSS:} This is used to style the website.
+\item \underline{Highcharts:} This is a JavaScript library that is used to create graphs. It has been used to make the graph.
 \end{itemize}
 \subsection{Middle and Back End Technologies}
 \begin{itemize}
-\item \underline{Flask:} This is used to create the server side of the website. This will render the Jinja templates and also create all the linking between the front end and the database.
-\item \underline{Some SQL thing:} This is used to create the database for the website.
-\item \underline{nselib:} This is used to retrieve data about NSE stock market. We are using it to get the list of companies and their stock symbols. We use a class captial\_market to retrieve day prices of a stock.
+\item \underline{Vue:} This is the mainframe work used in this project. It is used to create a dynamic front end of the website. It also acts as the middleware, connecting the front end to the back end.
+\item \underline{Flask:} This is used as a server. It accepts requests from Vue and processes them. It has been used mainly to call nselib. It also calls postgreSQL.
+\item \underline{Express:} This is also running as a server. Its main role is to perform calls to nse india.
+\item \underline{PostgreSQL:} This is used to create the database for the website. It mainly stores news data.
+\item \underline{nselib:} This is used to retrieve data about NSE stock market. We are using it to get the list of companies and their stock symbols. We use the class captial\_market to retrieve day prices of a stock.
+\item \underline{snscrape:} This is used to make search requests to twitter.
+\item \underline{praw and pushshift:} These are used to make search requests to reddit.
 \end{itemize}
 \section{Discarded modules and technoligies}
 \begin{itemize}
 \item \underline{streamlit:} This was used to create the first iteration of the front end of the website. It was discarded because it was not flexible enough.
 \item \underline{pyhawkes:} This was an alternative to haweslib. It was not used as hawkeslib proved to be enough.
+\item \underline{Selenium:} This was used to make special requests to the nse api. However this was removed as the method was a form of CSRF (\,Cross Site Request Forgery\,). We are instead using an open-source database of news articles.
 \end{itemize}
 \end{document}
