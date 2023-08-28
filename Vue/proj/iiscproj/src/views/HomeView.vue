@@ -89,9 +89,9 @@
                             getNews(a + 1);
                         });
                 }
-                // await starter();
+                await starter();
                 console.log("getting news");
-                // await getNews(0);
+                await getNews(0);
             });
 
             return { news };
