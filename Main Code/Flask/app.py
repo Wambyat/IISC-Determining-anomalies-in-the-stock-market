@@ -72,6 +72,18 @@ def stock():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+@app.route("/api/stock/data/", methods=["POST", "GET"])
+def stockData():
+    if request.method == "POST":
+        comp = request.get_json()
+        comp = comp["ticker"].upper()
+    else:
+        comp = "FOCUS"
+    try:
+        data = capital_market.price_volume_and_deliverable_position_data(symbol=comp, period="1Y")
+        return jsonify(data.to_dict())
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 @app.route("/model/", methods=["POST", "GET"])
 def model():
