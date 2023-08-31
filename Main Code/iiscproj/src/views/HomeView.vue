@@ -63,7 +63,7 @@
                     return axios
                         .get(apiURL)
                         .then((response) => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             return response.data;
                         })
                         .catch((error) => {
@@ -80,7 +80,7 @@
                     return axios
                         .get(apiUrl)
                         .then((response) => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             news.value = response.data;
                             return response.data;
                         })
