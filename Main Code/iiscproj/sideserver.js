@@ -1,5 +1,6 @@
 const express = require("express");
 const axios = require("axios");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -45,15 +46,50 @@ app.get("/api/corporate-announcements", (req, res) => {
         });
 });
 
+function removeCompanySuffixes(query) {
+    const companySuffixes = [
+        "limited",
+        "incorporated",
+        "ltd",
+        "inc",
+        "corp",
+        "corporation",
+        "co",
+        "pvt",
+        "private",
+        "plc",
+        "pl",
+        "llc",
+        "llp",
+    ];
+
+    const newQuery = [];
+    for (const word of query.split(" ")) {
+        if (!companySuffixes.includes(word.toLowerCase())) {
+            newQuery.push(word);
+        }
+    }
+
+    return newQuery.join(" ");
+}
+
 // accept post request
+app.use(bodyParser.json());
+
 app.post("/api/news", (req, res) => {
     const requ = req.body;
+    console.log(requ.query);
+    console.log(requ.from);
+    console.log(requ.to);
+    const query = removeCompanySuffixes(requ.query);
+    console.log(query);
+
     var options = {
         method: "GET",
         url: "https://api.newscatcherapi.com/v2/search",
         params: {
-            q: requ.query,
-            lang: requ.lang,
+            q: query,
+            lang: "en",
             sort_by: "relevancy",
             page: "1",
             from_rank: "0",
@@ -86,7 +122,6 @@ app.post("/api/news", (req, res) => {
             res.status(500).json({
                 error: "An error occurred",
                 error: error,
-                url: url,
             });
         });
 });
