@@ -1,6 +1,6 @@
 <template>
     <div>
-        <highcharts :constructor-type="'stockChart'" :options="chartOptions" />
+        <highcharts :constructor-type="'stockChart'" :options="chartOptions" class="graphBaby"/>
     </div>
 </template>
 
@@ -35,6 +35,10 @@
                         },
                     },
                 ],
+                title: {
+                    text: "Stock Price",
+                },
+                theme: "brand-dark",
             });
             return {
                 chartOptions,
@@ -42,3 +46,9 @@
         },
     };
 </script>
+
+<style>
+.graphBaby {
+    border-radius: 15px;
+}
+</style>
