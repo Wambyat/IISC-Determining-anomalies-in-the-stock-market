@@ -6,7 +6,9 @@ import "bootstrap"
 import Highcharts from "highcharts";
 import StockModule from "highcharts/modules/stock";
 import HighchartsVue from "highcharts-vue";
+import brandDark from "highcharts/themes/brand-dark";
 
+brandDark(Highcharts);
 StockModule(Highcharts);
 
 const app = createApp(App);

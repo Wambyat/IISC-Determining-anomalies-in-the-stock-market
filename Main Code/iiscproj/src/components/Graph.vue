@@ -1,6 +1,6 @@
 <template>
     <div>
-        <highcharts :constructor-type="'stockChart'" :options="chartOptions" />
+        <highcharts :constructor-type="'stockChart'" :options="chartOptions" class="graphBaby"/>
     </div>
 </template>
 
@@ -14,6 +14,7 @@
         },
         setup(props) {
             const data = props.data;
+            console.log(data)
             const chartOptions = ref({
                 series: [
                     {
@@ -22,6 +23,26 @@
                         useHTML: true,
                         tooltip: {
                             pointFormatter: function () {
+                                // check if articleLink is undefined
+                                if (this.articleLink === "No News" || this.articleLink === undefined) {
+                                    return (
+                                        "Price: " +
+                                        this.y +
+                                        '<br> No News'+
+                                        "</a>"
+                                    );
+                                }
+                                if (this.articleTitle) {
+                                    return (
+                                        "Price: " +
+                                        this.y +
+                                        '<br> <a href="' +
+                                        this.articleLink +
+                                        '">' +
+                                        this.articleTitle +
+                                        "</a>"
+                                    );
+                                }
                                 return (
                                     "Price: " +
                                     this.y +
@@ -35,6 +56,10 @@
                         },
                     },
                 ],
+                title: {
+                    text: "Stock Price",
+                },
+                theme: "brand-dark",
             });
             return {
                 chartOptions,
@@ -42,3 +67,9 @@
         },
     };
 </script>
+
+<style>
+.graphBaby {
+    border-radius: 15px;
+}
+</style>
