@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from nselib import capital_market
 import datetime
+import time
 
 # instantiate the app
 app = Flask(__name__)
@@ -72,6 +73,7 @@ def stock():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+
 @app.route("/api/stock/data/", methods=["POST", "GET"])
 def stockData():
     if request.method == "POST":
@@ -80,14 +82,27 @@ def stockData():
     else:
         comp = "FOCUS"
     try:
-        data = capital_market.price_volume_and_deliverable_position_data(symbol=comp, period="1Y")
-        return jsonify(data.to_dict())
+        data = capital_market.price_volume_and_deliverable_position_data(
+            symbol=comp, period="1Y"
+        )
+        data = data[["Date", "ClosePrice"]]
+        data["Date"] = data["Date"].apply(
+            lambda x: time.mktime(datetime.datetime.strptime(x, "%d-%b-%Y").timetuple())
+        )
+        # rename date to x and y ClosePrice to y
+        data = data.rename(columns={"Date": "x", "ClosePrice": "y"})
+        #convert values in y from str to float
+        data["y"] = data["y"].str.replace(",", "")
+        data["y"] = data["y"].astype(float)
+
+        return jsonify(data.to_dict(orient="records"))
     except Exception as e:
         return jsonify({"error": str(e)})
 
+
 @app.route("/model/", methods=["POST", "GET"])
 def model():
-    return jsonify({"data":"Model has been called! Hello from python"})
+    return jsonify({"data": "Model has been called! Hello from python"})
 
 
 if __name__ == "__main__":

@@ -78,11 +78,7 @@ app.use(bodyParser.json());
 
 app.post("/api/news", (req, res) => {
     const requ = req.body;
-    console.log(requ.query);
-    console.log(requ.from);
-    console.log(requ.to);
     const query = removeCompanySuffixes(requ.query);
-    console.log(query);
 
     var options = {
         method: "GET",
@@ -120,7 +116,6 @@ app.post("/api/news", (req, res) => {
         })
         .catch((error) => {
             res.status(500).json({
-                error: "An error occurred",
                 error: error,
             });
         });
