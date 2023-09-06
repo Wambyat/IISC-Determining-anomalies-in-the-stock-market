@@ -91,7 +91,7 @@ app.post("/api/news", (req, res) => {
             from_rank: "0",
             to_rank: "1000",
             countries: "IN",
-            page_size: "3",
+            page_size: requ.page_size,
             from: requ.from,
             to: requ.to,
         },
@@ -107,14 +107,20 @@ app.post("/api/news", (req, res) => {
             // make json with title, link
             var json = [];
             for (let i = 0; i < resu.articles.length; i++) {
+                // convert from 2023-08-31 10:00:00 to 31-08-2023
+                const date = resu.articles[i].published_date.split(" ")[0];
+                // convert from 31-08-2023 to unix timestamp
+                const unixTimestamp = new Date(date).getTime();
                 json.push({
                     title: resu.articles[i].title,
                     link: resu.articles[i].link,
+                    date: unixTimestamp,
                 });
             }
             res.json(json);
         })
         .catch((error) => {
+            console.log(error);
             res.status(500).json({
                 error: error,
             });

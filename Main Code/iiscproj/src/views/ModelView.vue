@@ -1,7 +1,6 @@
 <template>
     <div class="model">
         <h1>IG model goes here</h1>
-        <!-- button that calls a function modelRun-->
         <button @click="modelRun">Run Model</button>
         <p id="modelRes"></p>
     </div>

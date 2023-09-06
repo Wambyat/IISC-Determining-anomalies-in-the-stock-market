@@ -41,6 +41,8 @@
                     :href="article.link"
                     target="_blank">
                     {{ article.title }}
+                    <br />
+                    {{ article.date }}
                 </component>
             </div>
         </div>
@@ -126,20 +128,19 @@
             const query = ref(props.query);
             fetch("http://localhost:5000/api/all").then((response) => {
                 const data = response.json().then((data) => {
-                    console.log(data);
+                    // console.log(data);
                     compName.value = data[query.value];
                     GetNews();
-                    console.log(news.value);
+                    // console.log(news.value);
                 });
             });
 
             onMounted(async () => {
                 try {
                     const latestData = await getLatest();
-                    console.log(latestData);
+                    // console.log(latestData);
                     dataToday.value = latestData;
                     chartData.value = await getStockValues();
-                    console.log(chartData.value);
                 } catch (error) {
                     console.error(error);
                 }
@@ -169,45 +170,42 @@
                 }
             }
 
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1).toString().padStart(2, "0");
+                const day = date.getDate().toString().padStart(2, "0");
+                return `${year}-${month}-${day}`;
+            }
+
             function today() {
-                const today = new Date();
-                const yesterday = new Date();
+                const dates = [];
+                const currentDate = new Date();
 
-                // check if today is sat, sun or mon. if it is then return friday's date
-                if (today.getDay() == 0) {
-                    today.setDate(today.getDate() - 2);
-                } else if (today.getDay() == 6) {
-                    today.setDate(today.getDate() - 1);
-                } else if (today.getDay() == 1) {
-                    today.setDate(today.getDate() - 3);
+                for (let i = 0; i < 30; i++) {
+                    const date = new Date();
+                    date.setDate(currentDate.getDate() - i);
+
+                    if (date.getDay() >= 1 && date.getDay() <= 5) {
+                        dates.push(formatDate(date));
+                    }
                 }
-                yesterday.setDate(today.getDate() - 1);
-                const dd = String(today.getDate()).padStart(2, "0");
-                const mm = String(today.getMonth() + 1).padStart(2, "0");
-                const yyyy = today.getFullYear();
-                const date_today = yyyy + "-" + mm + "-" + dd;
-
-                const dd1 = String(yesterday.getDate()).padStart(2, "0");
-                const mm1 = String(yesterday.getMonth() + 1).padStart(2, "0");
-                const yyyy1 = yesterday.getFullYear();
-                const date_yesterday = yyyy1 + "-" + mm1 + "-" + dd1;
-
-                return [date_yesterday, date_today];
+                return dates;
             }
             async function GetNews() {
                 try {
                     // today's date
                     const days = today();
-                    console.log(days[0], days[1], compName.value);
+                    // console.log(days[0], days[1], compName.value);
                     const apiURL = "http://localhost:3000/api/news";
                     const response = await axios
                         .post(apiURL, {
                             query: compName.value,
-                            from: days[0],
-                            to: days[1],
+                            from: days[1],
+                            to: days[0],
+                            page_size: 5,
                         })
                         .then((response) => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             news.value = response.data;
                         });
                 } catch (error) {
@@ -215,7 +213,7 @@
                     console.log(error);
                 }
             }
-            return { dataToday, compName, news,chartData };
+            return { dataToday, compName, news, chartData };
         },
     };
 </script>
