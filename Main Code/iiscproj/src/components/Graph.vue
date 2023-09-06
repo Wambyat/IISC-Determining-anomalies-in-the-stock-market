@@ -1,6 +1,9 @@
 <template>
     <div>
-        <highcharts :constructor-type="'stockChart'" :options="chartOptions" class="graphBaby"/>
+        <highcharts
+            :constructor-type="'stockChart'"
+            :options="chartOptions"
+            class="graphBaby" />
     </div>
 </template>
 
@@ -14,7 +17,6 @@
         },
         setup(props) {
             const data = props.data;
-            console.log(data)
             const chartOptions = ref({
                 series: [
                     {
@@ -23,12 +25,14 @@
                         useHTML: true,
                         tooltip: {
                             pointFormatter: function () {
-                                // check if articleLink is undefined
-                                if (this.articleLink === "No News" || this.articleLink === undefined) {
+                                if (
+                                    this.articleLink === "No News" ||
+                                    this.articleLink === undefined
+                                ) {
                                     return (
                                         "Price: " +
                                         this.y +
-                                        '<br> No News'+
+                                        "<br> No News" +
                                         "</a>"
                                     );
                                 }
@@ -69,7 +73,7 @@
 </script>
 
 <style>
-.graphBaby {
-    border-radius: 15px;
-}
+    .graphBaby {
+        border-radius: 15px;
+    }
 </style>

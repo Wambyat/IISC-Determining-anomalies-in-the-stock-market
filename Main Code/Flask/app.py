@@ -46,6 +46,7 @@ def search():
 def all():
     try:
         data = capital_market.equity_list()
+        print(data)
         data = data[["SYMBOL", "NAME OF COMPANY"]]
         test = {data["SYMBOL"][i]: data["NAME OF COMPANY"][i] for i in range(len(data))}
         return jsonify(test)
@@ -89,14 +90,20 @@ def stockData():
         data["Date"] = data["Date"].apply(
             lambda x: time.mktime(datetime.datetime.strptime(x, "%d-%b-%Y").timetuple())
         )
+        # multiply by 1000 to convert to milliseconds
+        data["Date"] = data["Date"].apply(lambda x: x * 1000)
         # rename date to x and y ClosePrice to y
         data = data.rename(columns={"Date": "x", "ClosePrice": "y"})
         #convert values in y from str to float
+        data["y"] = data["y"].astype(str)
         data["y"] = data["y"].str.replace(",", "")
         data["y"] = data["y"].astype(float)
 
+        print(data)
+
         return jsonify(data.to_dict(orient="records"))
     except Exception as e:
+        print(e)
         return jsonify({"error": str(e)})
 
 
