@@ -4,12 +4,16 @@
             v-model="searchQuery"
             @input="genList"
             placeholder="Search for the company"
-            id="compIn" style="min-width: 40%; border: none; "/>
+            id="compIn"
+            style="min-width: 40%; border: none" />
         <button @click="performSearch">Search</button>
         <div class="search-list">
             <p v-if="filteredData.error">{{ filteredData.error }}</p>
+            <!-- This is what makes the dynamic list -->
             <ul v-else v-for="(item, key) in filteredData" :key="key">
-                <router-link style="text-decoration: none;" :to="{ name: 'search', params: { query: key } }">
+                <router-link
+                    style="text-decoration: none"
+                    :to="{ name: 'search', params: { query: key } }">
                     <li class="st">{{ key }}: {{ item }}</li>
                 </router-link>
             </ul>
@@ -18,13 +22,12 @@
 </template>
 
 <style scoped>
-
-.st{
-    color: black;
-    cursor: pointer;
-    /* no underlined */
-    text-decoration: none;
-}
+    .st {
+        color: black;
+        cursor: pointer;
+        /* no underlined */
+        text-decoration: none;
+    }
 
     .search-list ul {
         list-style-type: none;
@@ -36,7 +39,7 @@
     }
     .search-list ul:hover {
         background-color: #f1f1f1;
-}
+    }
     .search-list::-webkit-scrollbar {
         width: 20px;
         background-color: #f1f1f1;
@@ -66,13 +69,12 @@
 </style>
 
 <script>
-    import { ref, onMounted } from "vue";
-    let comp;
+    import { onMounted } from "vue";
+    let all_company_list;
     export default {
         setup() {
             onMounted(async () => {
-                console.log("search mounted");
-                const abc = async function () {
+                const getAllCompany = async function () {
                     try {
                         const response = await fetch(
                             "http://localhost:5000/api/all"
@@ -83,7 +85,7 @@
                         console.error(error);
                     }
                 };
-                comp = await abc();
+                all_company_list = await getAllCompany();
             });
         },
         data() {
@@ -99,11 +101,12 @@
             genList() {
                 function filterJson(jsonData, input) {
                     const filteredJson = {};
-                    // This is only here because the json and makes my computer lag. Test without the limit if u wish.
+                    // This minimum requirement is only here because the resulting json is large and makes my computer lag. Test without the limit if you wish.
                     if (input.length < 3) {
                         return { error: "Please enter more than 2 characters" };
                     }
                     for (const key in jsonData) {
+                        // This checks if the input is in either the ticker or the company name.
                         if (
                             key.includes(input) ||
                             jsonData[key]
@@ -116,10 +119,7 @@
                     return filteredJson;
                 }
                 const userInput = document.getElementById("compIn").value;
-                console.log("Filtering based on: ", userInput);
-                this.filteredData = filterJson(comp, userInput);
-                console.log(this.filteredData);
-                console.log("genList");
+                this.filteredData = filterJson(all_company_list, userInput);
             },
         },
     };

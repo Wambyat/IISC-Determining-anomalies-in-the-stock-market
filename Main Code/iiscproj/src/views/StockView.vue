@@ -200,7 +200,7 @@
                     const response = await axios
                         .post(apiURL, {
                             query: compName.value,
-                            from: days[1],
+                            from: days[5],
                             to: days[0],
                             page_size: 5,
                         })

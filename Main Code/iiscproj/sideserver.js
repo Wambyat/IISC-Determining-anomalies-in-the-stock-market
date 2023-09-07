@@ -51,7 +51,6 @@ app.get("/api/corporate-announcements", (req, res) => {
         });
 });
 
-
 // This function removes all the standard company suffixes from the query.
 function removeCompanySuffixes(query) {
     const companySuffixes = [
@@ -97,7 +96,7 @@ app.post("/api/news", (req, res) => {
             sort_by: "relevancy",
             page: "1",
             from_rank: "0",
-            to_rank: "1000",
+            to_rank: "5000",
             countries: "IN",
             page_size: requ.page_size,
             from: requ.from,
@@ -113,15 +112,24 @@ app.post("/api/news", (req, res) => {
         .then(function (response) {
             const resu = response.data;
             var json = [];
-            for (let i = 0; i < resu.articles.length; i++) {
-                const date = resu.articles[i].published_date.split(" ")[0];
-                const unixTimestamp = new Date(date).getTime();
+            if (resu.status === "No matches for your search.") {
                 json.push({
-                    title: resu.articles[i].title,
-                    link: resu.articles[i].link,
-                    date: unixTimestamp,
+                    title: "No recent articles found. Search Google instead?",
+                    link: "https://www.google.com/search?q=" + query,
+                    date: 0,
                 });
+            } else {
+                for (let i = 0; i < resu.articles.length; i++) {
+                    const date = resu.articles[i].published_date.split(" ")[0];
+                    const unixTimestamp = new Date(date).getTime();
+                    json.push({
+                        title: resu.articles[i].title,
+                        link: resu.articles[i].link,
+                        date: unixTimestamp,
+                    });
+                }
             }
+
             res.json(json);
         })
         .catch((error) => {
