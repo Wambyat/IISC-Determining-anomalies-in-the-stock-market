@@ -160,4 +160,7 @@ def model():
 if __name__ == "__main__":
     # debug=True is used during development. It auto restarts the server when this file is modified.
     # app.run(debug=True)
-    app.run()
+    app.run(port=5000)
+
+
+# Whenever this is deployed completly, refer to https://flask.palletsprojects.com/en/2.3.x/deploying/ for deployment.
