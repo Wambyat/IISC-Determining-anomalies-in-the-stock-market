@@ -6,15 +6,14 @@ import "bootstrap"
 import Highcharts from "highcharts";
 import StockModule from "highcharts/modules/stock";
 import HighchartsVue from "highcharts-vue";
-import brandDark from "highcharts/themes/brand-dark";
 
+// This is where you set the highcharts style.
+import brandDark from "highcharts/themes/brand-dark";
 brandDark(Highcharts);
 StockModule(Highcharts);
 
 const app = createApp(App);
 
-// Use the HighchartsVue plugin, register <highcharts> component
 app.use(HighchartsVue);
 app.use(router);
-// Mount the application
 app.mount("#app");

@@ -11,6 +11,7 @@
         name: "ModelView",
         methods: {
             async modelRun() {
+                // Change this to whatever the model will output.
                 const responce = await fetch("http://localhost:5000/model");
                 const data = await responce.json();
                 if (data.error) {

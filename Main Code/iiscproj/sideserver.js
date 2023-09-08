@@ -10,8 +10,13 @@ app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
     next();
 });
+
+// Change this to whatever port you want.
 const port = 3000;
 
+// This server exists only so that we can spam NSE with requests so that it might eventually send back a proper response.
+
+// This is just a route that MIGHT "whitelist" us before we spam.
 app.get("/api/starter/", (req, res) => {
     const url = "https://www.nseindia.com/";
     axios
@@ -28,7 +33,7 @@ app.get("/api/starter/", (req, res) => {
         });
 });
 
-// Proxy route
+// This is where we spam NSE with requests. res.json is used to send back the response to the client.
 app.get("/api/corporate-announcements", (req, res) => {
     const url =
         "https://www.nseindia.com/api/corporate-announcements?index=equities";
@@ -46,6 +51,7 @@ app.get("/api/corporate-announcements", (req, res) => {
         });
 });
 
+// This function removes all the standard company suffixes from the query.
 function removeCompanySuffixes(query) {
     const companySuffixes = [
         "limited",
@@ -73,9 +79,10 @@ function removeCompanySuffixes(query) {
     return newQuery.join(" ");
 }
 
-// accept post request
+// This is so that the POST request body can be parsed.
 app.use(bodyParser.json());
 
+// This is the route that queries the </newscatcher> API. If you use this and get an error that's something like you dont have permission or something, either get your own API key or email me at anirudhaanekal@gmail.com and I'll ask for more requests or something.
 app.post("/api/news", (req, res) => {
     const requ = req.body;
     const query = removeCompanySuffixes(requ.query);
@@ -89,7 +96,7 @@ app.post("/api/news", (req, res) => {
             sort_by: "relevancy",
             page: "1",
             from_rank: "0",
-            to_rank: "1000",
+            to_rank: "5000",
             countries: "IN",
             page_size: requ.page_size,
             from: requ.from,
@@ -104,19 +111,25 @@ app.post("/api/news", (req, res) => {
         .request(options)
         .then(function (response) {
             const resu = response.data;
-            // make json with title, link
             var json = [];
-            for (let i = 0; i < resu.articles.length; i++) {
-                // convert from 2023-08-31 10:00:00 to 31-08-2023
-                const date = resu.articles[i].published_date.split(" ")[0];
-                // convert from 31-08-2023 to unix timestamp
-                const unixTimestamp = new Date(date).getTime();
+            if (resu.status === "No matches for your search.") {
                 json.push({
-                    title: resu.articles[i].title,
-                    link: resu.articles[i].link,
-                    date: unixTimestamp,
+                    title: "No recent articles found. Search Google instead?",
+                    link: "https://www.google.com/search?q=" + query,
+                    date: 0,
                 });
+            } else {
+                for (let i = 0; i < resu.articles.length; i++) {
+                    const date = resu.articles[i].published_date.split(" ")[0];
+                    const unixTimestamp = new Date(date).getTime();
+                    json.push({
+                        title: resu.articles[i].title,
+                        link: resu.articles[i].link,
+                        date: unixTimestamp,
+                    });
+                }
             }
+
             res.json(json);
         })
         .catch((error) => {
