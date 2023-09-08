@@ -21,15 +21,13 @@
             </div>
         </div>
     </nav>
-    <router-view/>
+    <router-view />
     <footer>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 text-center">
                     <p>
-                        <small
-                            >&copy; 2023 Ooga Booga Inc.</small
-                        >
+                        <small>&copy; 2023 Ooga Booga Inc.</small>
                     </p>
                 </div>
             </div>
