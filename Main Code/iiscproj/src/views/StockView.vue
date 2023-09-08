@@ -1,10 +1,10 @@
 <template>
     <div>
-        <div v-if="compName" class="newsClass">
-            <h2>{{ compName }}</h2>
+        <div v-if="company_name" class="newsClass">
+            <h2>{{ company_name }}</h2>
         </div>
         <div v-else>loading</div>
-        <div v-if="Object.keys(dataToday).length === 0">
+        <div v-if="Object.keys(stock_data_today).length === 0">
             <p>Loading</p>
         </div>
         <div v-else>
@@ -18,21 +18,22 @@
                     <th>No of trades</th>
                 </tr>
                 <tr>
-                    <td>{{ dataToday["AveragePrice"] }}</td>
-                    <td>{{ dataToday["HighPrice"] }}</td>
-                    <td>{{ dataToday["LowPrice"] }}</td>
-                    <td>{{ dataToday["LastPrice"] }}</td>
-                    <td>{{ dataToday["DeliverableQty"] }}</td>
-                    <td>{{ dataToday["No.ofTrades"] }}</td>
+                    <td>{{ stock_data_today["AveragePrice"] }}</td>
+                    <td>{{ stock_data_today["HighPrice"] }}</td>
+                    <td>{{ stock_data_today["LowPrice"] }}</td>
+                    <td>{{ stock_data_today["LastPrice"] }}</td>
+                    <td>{{ stock_data_today["DeliverableQty"] }}</td>
+                    <td>{{ stock_data_today["No.ofTrades"] }}</td>
                 </tr>
             </table>
         </div>
-        <div v-if="chartData.length === 0">Loading</div>
+        <div v-if="chart_data.length === 0">Loading</div>
         <div v-else>
-            <Graph :data="chartData" class="newsClass graphClass" />
+            <Graph :data="chart_data" class="newsClass graphClass" />
         </div>
         <div v-if="news" class="newsClass">
             <h2>News</h2>
+            <!-- There are other details available. Add acoording to the requirements. Refer to </newscatcher> documentation for full details. -->
             <div v-for="article in news">
                 <component
                     :is="article.link.startsWith('http') ? 'a' : 'router-link'"
@@ -42,7 +43,6 @@
                     target="_blank">
                     {{ article.title }}
                     <br />
-                    {{ article.date }}
                 </component>
             </div>
         </div>
@@ -111,42 +111,39 @@
         data() {
             return {
                 news: {},
-                dataToday: {},
-                compName: "",
-                chartData: [],
+                stock_data_today: {},
+                company_name: "",
+                chart_data: [],
             };
         },
         props: {
             query: String,
         },
         setup(props) {
-            // news and dataToday are like global variables. They will be used in the template. query is from the prev page.
             const news = ref({});
-            const dataToday = ref({});
-            const compName = ref("");
-            const chartData = ref([]);
+            const stock_data_today = ref({});
+            const company_name = ref("");
+            const chart_data = ref([]);
             const query = ref(props.query);
             fetch("http://localhost:5000/api/all").then((response) => {
-                const data = response.json().then((data) => {
-                    // console.log(data);
-                    compName.value = data[query.value];
+                response.json().then((data) => {
+                    company_name.value = data[query.value];
                     GetNews();
-                    // console.log(news.value);
                 });
             });
 
             onMounted(async () => {
                 try {
-                    const latestData = await getLatest();
-                    // console.log(latestData);
-                    dataToday.value = latestData;
-                    chartData.value = await getStockValues();
+                    const latestData = await getTodayStockData();
+                    stock_data_today.value = latestData;
+                    chart_data.value = await getStockValues();
                 } catch (error) {
                     console.error(error);
                 }
             });
 
-            async function getLatest() {
+            // This gets data from NSE about the stock. It will be today's live data. It has been filtered in the flask server.
+            async function getTodayStockData() {
                 try {
                     const apiURL = "http://localhost:5000/api/stock/";
                     const response = await axios.post(apiURL, {
@@ -158,6 +155,7 @@
                 }
             }
 
+            // This gets data from NSE about the stock prices only. It will be one year's worth of data. It has been formatted, by flask, as required by highcharts, already.
             async function getStockValues() {
                 try {
                     const apiURL = "http://localhost:5000/api/stock/data/";
@@ -170,6 +168,7 @@
                 }
             }
 
+            // This is a helper function for today()
             function formatDate(date) {
                 const year = date.getFullYear();
                 const month = (date.getMonth() + 1).toString().padStart(2, "0");
@@ -177,6 +176,7 @@
                 return `${year}-${month}-${day}`;
             }
 
+            // This function returns an array of dates for the last 30 days, excluding weekends.
             function today() {
                 const dates = [];
                 const currentDate = new Date();
@@ -191,29 +191,27 @@
                 }
                 return dates;
             }
+
+            // This function gets news from </newscatcher>. It should be unfiltered. It has been set to get news from the last 5ish days.
             async function GetNews() {
                 try {
-                    // today's date
                     const days = today();
-                    // console.log(days[0], days[1], compName.value);
                     const apiURL = "http://localhost:3000/api/news";
                     const response = await axios
                         .post(apiURL, {
-                            query: compName.value,
+                            query: company_name.value,
                             from: days[5],
                             to: days[0],
                             page_size: 5,
                         })
                         .then((response) => {
-                            // console.log(response.data);
                             news.value = response.data;
                         });
                 } catch (error) {
-                    // throw error;
                     console.log(error);
                 }
             }
-            return { dataToday, compName, news, chartData };
+            return { stock_data_today, company_name, news, chart_data };
         },
     };
 </script>
