@@ -16,7 +16,7 @@ Reddit and 𝕏 (twitter) integration code is ready and will work and can be int
     * [app.py](#app.py)
   * [iiscproj](#iiscproj)
     * [public]
-    * [src](\Main%20Code\iiscproj\src)
+    * [src](/Main%20Code/iiscproj/src)
       * [assets]
       * [components]
         * [Graph.vue](#graph.vue)
