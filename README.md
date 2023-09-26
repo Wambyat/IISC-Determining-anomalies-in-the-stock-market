@@ -5,7 +5,7 @@ Refer to the flow diagram (flow.png) in root folder for a visual understanding o
 
 It is a stock market analysis based project with social media posts and news integrated. News integration to be done using [ \</newscatcher> ](https://newscatcherapi.com/)
 
-Reddit and 𝕏 (twitter) integration code is ready and will work and can be integrated as soon as the companies change their API rules.
+Reddit and 𝕏 (twitter) integration code is ready and will work and can be integrated as soon as the companies change their API rules. The github action will work if there is more than 2 branches (excluding legacy)
 
 ## Folder Structure
 ### Clicking on a folder will take you to an explanation. Clicking on a file will take you to the code.
